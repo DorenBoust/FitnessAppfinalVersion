@@ -11,11 +11,56 @@
         android:id="@+id/splash"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="#000000"
+        android:background="@color/mainGreen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottie_load_splash"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="64dp"
+            app:lottie_loop="true"
+            app:layout_constraintBottom_toTopOf="@+id/guideline73"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_rawRes="@raw/load_intro" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline73"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.48" />
+
+        <TextView
+            android:id="@+id/animation_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/open_sans_hebrew_regular"
+            android:text="טוען את נתונך... המתן"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lottie_load_splash" />
+
+        <Button
+            android:id="@+id/btn_try_again"
+            android:background="@drawable/btn_login_custom_design"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/open_sans_hebrew_regular"
+            android:textColor="@color/mainGreen"
+            android:text="נסה שנית"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/animation_tv" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -31,8 +76,8 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@color/menuColor"
-        android:visibility="invisible"
         android:elevation="16dp"
+        android:visibility="invisible"
 
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

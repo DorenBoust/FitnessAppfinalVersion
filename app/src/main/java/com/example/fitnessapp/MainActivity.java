@@ -16,9 +16,12 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.fitnessapp.articals.AsyncArticalsJSON;
 import com.example.fitnessapp.articals.Recipes;
 import com.example.fitnessapp.articals.Recpie;
@@ -58,7 +61,10 @@ public class MainActivity extends AppCompatActivity {
     private User userObject;
     private Recipes recpiesList;
     private ConstraintLayout splash;
+    private TextView tvAnimation;
+    private LottieAnimationView lottieAnimationViewLoadSplash;
     private ConstraintLayout menuBar;
+    private Button tryAgainBTN;
 
 
     private int lastClicked = 1;
@@ -100,6 +106,11 @@ public class MainActivity extends AppCompatActivity {
 
 
         splash = findViewById(R.id.splash);
+        lottieAnimationViewLoadSplash = findViewById(R.id.lottie_load_splash);
+        tvAnimation = findViewById(R.id.animation_tv);
+        lottieAnimationViewLoadSplash.playAnimation();
+        tryAgainBTN = findViewById(R.id.btn_try_again);
+
         menuBar = findViewById(R.id.menuBar);
 
         iconStatus = findViewById(R.id.menu_icon_status);
@@ -143,27 +154,47 @@ public class MainActivity extends AppCompatActivity {
            public void onChanged(User user) {
 
                userObject = user;
-               StatusFragment statusFragment = new StatusFragment();
 
-               BundleSingleton.setUser(userObject, statusFragment);
+               if (user != null) {
+                   StatusFragment statusFragment = new StatusFragment();
 
-
-               splash.setAnimation(AnimationUtils.loadAnimation(MainActivity.this, R.anim.faidout));
-               splash.setVisibility(View.INVISIBLE);
-               menuBar.setAnimation(AnimationUtils.loadAnimation(MainActivity.this, R.anim.faidin));
-               menuBar.setVisibility(View.VISIBLE);
-               getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.faidin, R.anim.faidout).replace(R.id.mainFragment, statusFragment).commit();
+                   BundleSingleton.setUser(userObject, statusFragment);
 
 
+                   splash.setAnimation(AnimationUtils.loadAnimation(MainActivity.this, R.anim.faidout));
+                   splash.setVisibility(View.INVISIBLE);
+                   lottieAnimationViewLoadSplash.setAnimation(AnimationUtils.loadAnimation(MainActivity.this, R.anim.faidout));
+                   lottieAnimationViewLoadSplash.setVisibility(View.INVISIBLE);
+                   tvAnimation.setVisibility(View.INVISIBLE);
+
+                   menuBar.setAnimation(AnimationUtils.loadAnimation(MainActivity.this, R.anim.faidin));
+                   menuBar.setVisibility(View.VISIBLE);
+                   getSupportFragmentManager().beginTransaction().setCustomAnimations(R.anim.faidin, R.anim.faidout).replace(R.id.mainFragment, statusFragment).commit();
 
 
-               NotificationDietThread notificationDietThread = new NotificationDietThread(MainActivity.this, notificationManager, userObject);
+                   NotificationDietThread notificationDietThread = new NotificationDietThread(MainActivity.this, notificationManager, userObject);
 
-               notificationDietThread.start();
+                   notificationDietThread.start();
+               } else {
+                   tryAgainBTN.setVisibility(View.VISIBLE);
+                   lottieAnimationViewLoadSplash.setAnimation(R.raw.connection_error);
+                   lottieAnimationViewLoadSplash.playAnimation();
+                   tvAnimation.setText("לא נמצא חיבור לאינטרנט");
+
+               }
 
 
            }
        });
+
+        tryAgainBTN.setOnClickListener(v->{
+            tryAgainBTN.setVisibility(View.INVISIBLE);
+            lottieAnimationViewLoadSplash.setAnimation(R.raw.load_intro);
+            lottieAnimationViewLoadSplash.playAnimation();
+            tvAnimation.setText("טוען את נתונך... המתן");
+            jsonParser();
+
+        });
 
 
 

@@ -6,13 +6,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/imageView"
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="נא מלא את כל ההיסטוריה לפני מעבר לתרגיל הבא"
+        android:textColor="@color/mainGreen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ex_example" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

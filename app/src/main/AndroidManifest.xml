@@ -19,15 +19,17 @@
         <activity android:name=".articals.RecipeActivity" />
         <activity android:name=".main.DietActivity" />
         <activity android:name=".main.ExersiceActivity" />
+
+        <activity android:name=".IntroActivity"/>
         <activity android:name=".MainActivity" />
-        <activity android:name=".IntroActivity">
+            <activity android:name=".LogActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LogActivity" />
+
     </application>
 
 </manifest>

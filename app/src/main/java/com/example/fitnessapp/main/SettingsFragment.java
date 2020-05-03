@@ -29,7 +29,7 @@ public class SettingsFragment extends Fragment {
     private SettingsViewModel mViewModel;
     private User user;
     private Button btnLogout;
-    private Button btnUpdate;
+
 
     private Switch mealNotificationSwith;
 
@@ -46,7 +46,7 @@ public class SettingsFragment extends Fragment {
         System.out.println("Setting" + user);
 
         btnLogout = v.findViewById(R.id.settingFregment_btn_logout);
-        btnUpdate = v.findViewById(R.id.btn_update);
+
         mealNotificationSwith = v.findViewById(R.id.meals_notification);
 
         if (getSharedPrefreranceMealNotification() == 1){
